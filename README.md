@@ -1,2 +1,2 @@
-# tiny-ecommerce
-Tiny e-commerce project (Cart API + Frontend)
+# Tiny e-commerce
+This small project aims to provide an approach to provide an API service (backend) to provide data for a Frontend tiny e-commerce.
