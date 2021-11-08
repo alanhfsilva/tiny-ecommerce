@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/cart', function(){
+    return 'Add product + quantity...';
+});
+
+Route::delete('/cart/{itemId}', function(Request $request, $itemId){
+    return sprintf('Removing items %s...', $itemId);
+});
+
+Route::get('/cart', function(){
+    return 'List all products from cart...';
+});
+
+Route::post('/checkout', function(){
+    return 'Checkout section...';
 });
