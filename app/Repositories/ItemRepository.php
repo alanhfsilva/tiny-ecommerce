@@ -9,7 +9,7 @@ class ItemRepository
 {
     public function get(string $product_id): ?Item
     {
-        return session($this->getProductId($product_id), null);
+        return session($this->formatProductId($product_id), null);
     }
 
     public function all(): array
@@ -19,7 +19,7 @@ class ItemRepository
     
     public function add(Item $item): void
     {
-        if(empty(session($this->getProductId($item->product_id), null))) {
+        if(empty(session($this->formatProductId($item->product_id), null))) {
             $this->create($item);
         } else {
             $this->update($item);
@@ -28,8 +28,8 @@ class ItemRepository
 
     public function delete(string $product_id)
     {
-        if(!empty(session($this->getProductId($product_id), null))) {
-            session()->forget($this->getProductId($product_id));
+        if(!empty(session($this->formatProductId($product_id), null))) {
+            session()->forget($this->formatProductId($product_id));
             return true;
         }
 
@@ -38,7 +38,7 @@ class ItemRepository
 
     private function update(Item $item): void
     {
-        $item->product_qty = (float) session($this->getProductId($item->product_id), 0)->product_qty + (float) $item->product_qty;
+        $item->product_qty = (float) session($this->formatProductId($item->product_id), 0)->product_qty + (float) $item->product_qty;
         $this->store($item);
     }
 
@@ -50,11 +50,11 @@ class ItemRepository
 
     private function store(Item $item): void
     {
-        session([$this->getProductId($item->product_id) => $item]);
+        session([$this->formatProductId($item->product_id) => $item]);
         session()->save();
     }
 
-    private function getProductId(string $product_id): string
+    private function formatProductId(string $product_id): string
     {
         return sprintf("%s.%s", Item::PREFIX, $product_id);
     }
