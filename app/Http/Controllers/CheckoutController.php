@@ -28,13 +28,13 @@ class CheckoutController extends Controller
             Mail::to($to)->send(new CheckoutMail($emailDetails));
 
             return response()->json([
-                'message' => "Checkout email has been sent."
+                'message' => 'Checkout email has been sent.'
             ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'message' => 'Error when trying to send the checkout email',
                 'error' => $e->getMessage()
-            ], 500);;
+            ], 500);
         }
     }
 }
