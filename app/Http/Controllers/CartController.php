@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Repositories\ItemRepository;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -13,7 +15,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        return 'List all products from cart...';
+        $itemRepository = new ItemRepository();
+
+        return response()->json([
+            'items' => $itemRepository->all()
+        ], 200);
     }
 
     /**
@@ -32,7 +38,13 @@ class CartController extends Controller
             'product_img_url' => 'required'
         ]);
 
-        return 'Add product + quantity...';
+        $itemRepository = new ItemRepository();
+        $item = new Item($request->all());
+        $itemRepository->add($item);
+        
+        return response()->json([
+            'message' => sprintf("Item stored succesfully. %s", $item->product_qty)
+        ], 201);
     }
 
     /**
@@ -43,6 +55,16 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        return sprintf('Removing items %s...', $id);
+        $itemRepository = new ItemRepository();
+        
+        if ($itemRepository->delete($id)) {
+            return response()->json([
+                'message' => sprintf("Item [%s] deleted succesfully.", $id)
+            ], 200);
+        } 
+
+        return response()->json([
+            'error' => sprintf("Item [%s] do not exist.", $id)
+        ], 400);
     }
 }
