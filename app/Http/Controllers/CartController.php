@@ -24,6 +24,16 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'product_id' => 'required',
+            'product_name' => 'required',
+            'product_price' => 'required',
+            'product_qty' => 'required',
+            'product_img_url' => 'required'
+        ]);
+        session(['value' => 123]);
+        dd(session('value'));
+
         return 'Add product + quantity...';
     }
 
