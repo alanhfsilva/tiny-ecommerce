@@ -26,6 +26,10 @@ Route::get('/cart', function(){
     return 'List all products from cart...';
 });
 
+Route::get('/products', function(){
+    return 'Getting product list from 3rd party API...';
+});
+
 Route::post('/checkout', function(){
     return 'Checkout section...';
 });
