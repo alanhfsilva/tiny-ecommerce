@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,22 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/cart', function(){
-    return 'Add product + quantity...';
-});
+Route::post('/cart', [CartController::class, 'store']);
 
-Route::delete('/cart/{itemId}', function(Request $request, $itemId){
-    return sprintf('Removing items %s...', $itemId);
-});
+Route::delete('/cart/{itemId}', [CartController::class, 'destroy']);
 
-Route::get('/cart', function(){
-    return 'List all products from cart...';
-});
+Route::get('/cart', [CartController::class, 'index']);
 
-Route::get('/products', function(){
-    return 'Getting product list from 3rd party API...';
-});
+Route::get('/products', [ProductController::class, 'index']);
 
-Route::post('/checkout', function(){
-    return 'Checkout section...';
-});
+Route::post('/checkout', [CheckoutController::class, 'store']);

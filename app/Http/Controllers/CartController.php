@@ -13,7 +13,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        return 'List all products from cart...';
     }
 
     /**
@@ -24,7 +24,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'Add product + quantity...';
     }
 
     /**
@@ -35,6 +35,6 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return sprintf('Removing items %s...', $id);
     }
 }

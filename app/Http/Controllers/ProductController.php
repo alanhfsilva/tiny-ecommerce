@@ -13,6 +13,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return 'Getting product list from 3rd party API...';
     }
 }
