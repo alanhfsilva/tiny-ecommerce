@@ -31,8 +31,6 @@ class CartController extends Controller
             'product_qty' => 'required',
             'product_img_url' => 'required'
         ]);
-        session(['value' => 123]);
-        dd(session('value'));
 
         return 'Add product + quantity...';
     }
